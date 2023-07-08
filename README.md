@@ -11,7 +11,32 @@ See [ULID specification](https://github.com/ulid/spec) for more info
 * Optional hibernate type and ID generator
 
 ## Install
-TBD
+### Maven
+```xml
+...
+<repositories>
+    <repository>
+        <id>jitpack.io</id>
+        <url>https://jitpack.io</url>
+    </repository>
+</repositories>
+...
+<dependency>
+    <groupId>com.github.jaspeen</groupId>
+    <artifactId>ulid-java</artifactId>
+    <version>92935f63c6</version>
+</dependency>
+```
+### Gradle
+```groovy
+repositories {
+    ...
+    maven { url 'https://jitpack.io' }
+}
+dependencies {
+    implementation 'com.github.jaspeen:ulid-java:92935f63c6'
+}
+```
 
 ## Usage
 
