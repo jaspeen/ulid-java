@@ -1,6 +1,7 @@
 plugins {
     id 'java-library'
     id 'org.jreleaser' version '1.7.0'
+    id 'maven-publish'
 }
 
 group 'io.github.jaspeen'
@@ -24,6 +25,14 @@ java {
     }
     sourceCompatibility = "1.8"
     targetCompatibility = "1.8"
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.java
+        }
+    }
 }
 
 tasks.named('test') {
