@@ -5,7 +5,6 @@ plugins {
 }
 
 group 'io.github.jaspeen'
-version '0.0.1-SNAPSHOT'
 
 repositories {
     mavenCentral()
@@ -16,7 +15,6 @@ dependencies {
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
     implementation 'org.hibernate:hibernate-core:5.6.3.Final'
-
 }
 
 java {
@@ -25,16 +23,83 @@ java {
     }
     sourceCompatibility = "1.8"
     targetCompatibility = "1.8"
+
+    withJavadocJar()
+    withSourcesJar()
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
 }
 
 publishing {
     publications {
         maven(MavenPublication) {
             from components.java
+
+            pom {
+                name = project.name
+                description = 'ULID java implementation'
+                url = 'https://github.com/jaspeen/ulid-java'
+                inceptionYear = '2023'
+                licenses {
+                    license {
+                        name = 'Apache-2.0'
+                        url = 'https://spdx.org/licenses/Apache-2.0.html'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'jaspeen'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:https://github.com/jaspeen/ulid-java.git'
+                    developerConnection = 'scm:git:ssh://github.com/jaspeen/ulid-java.git'
+                    url = 'http://github.com/jaspeen/ulid-java'
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            url = layout.buildDirectory.dir('staging-deploy')
         }
     }
 }
 
-tasks.named('test') {
-    useJUnitPlatform()
+jreleaser {
+    dryrun = false
+    project {
+        java {
+            multiProject = false
+        }
+    }
+    release {
+        github {
+            skipRelease = true
+            skipTag = true
+        }
+    }
+    signing {
+        active = 'ALWAYS'
+        armored = true
+    }
+    deploy {
+        maven {
+            nexus2 {
+                central {
+                    active = 'ALWAYS'
+                    url = 'https://s01.oss.sonatype.org/service/local'
+                    snapshotUrl = 'https://s01.oss.sonatype.org/content/repositories/snapshots/'
+                    applyMavenCentralRules = true
+                    closeRepository = true
+                    releaseRepository = false
+                    stagingRepository('build/staging-deploy')
+                }
+            }
+        }
+    }
 }
+
+
