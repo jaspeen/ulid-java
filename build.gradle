@@ -69,7 +69,7 @@ publishing {
 }
 
 jreleaser {
-    dryrun = false
+    //dryrun = true
     project {
         java {
             multiProject = false
