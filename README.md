@@ -18,13 +18,13 @@ See [ULID specification](https://github.com/ulid/spec) for more info
 <dependency>
     <groupId>io.github.jaspeen</groupId>
     <artifactId>ulid-java</artifactId>
-    <version>0.0.3</version>
+    <version>0.1.0</version>
 </dependency>
 ```
 ### Gradle
 ```groovy
 dependencies {
-    implementation 'io.github.jaspeen:ulid-java:0.0.3'
+    implementation 'io.github.jaspeen:ulid-java:0.1.0'
 }
 ```
 
