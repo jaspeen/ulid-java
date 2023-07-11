@@ -216,5 +216,6 @@ class ULIDTest {
         System.out.println("InB:  " + Arrays.toString(fix.binValue));
         System.out.println("ParB: " + Arrays.toString(ULID.fromString(fix.strValue).toBytes()));
         System.out.println("Par1B:" + Arrays.toString(ULID.fromBytes(fix.binValue).toBytes()));
+        System.out.println(ULID.fromString(fix.strValue).toUUID());
     }*/
 }

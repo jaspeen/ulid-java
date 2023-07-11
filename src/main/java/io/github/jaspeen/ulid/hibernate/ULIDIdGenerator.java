@@ -45,7 +45,7 @@ public class ULIDIdGenerator implements IdentifierGenerator {
         if (ULID.class.isAssignableFrom(type.getReturnedClass())) {
             valueTransformer = ULIDTypeDescriptor.PassThroughTransformer.INSTANCE;
         } else if (UUID.class.isAssignableFrom(type.getReturnedClass())) {
-            valueTransformer = ULIDTypeDescriptor.PassThroughTransformer.INSTANCE;
+            valueTransformer = ULIDTypeDescriptor.ToUUIDTransformer.INSTANCE;
         } else if (String.class.isAssignableFrom(type.getReturnedClass())) {
             valueTransformer = ULIDTypeDescriptor.ToStringTransformer.INSTANCE;
         } else if (byte[].class.isAssignableFrom(type.getReturnedClass())) {
