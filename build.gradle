@@ -77,8 +77,9 @@ jreleaser {
     }
     release {
         github {
-            skipRelease = true
+            overwrite = true
             skipTag = true
+            draft = true
         }
     }
     signing {

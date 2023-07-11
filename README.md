@@ -77,3 +77,10 @@ class UUIDEntity {
     private UUID id;
 }
 ```
+Generator can be defined in package-info.java for all entities instead of field annotation in every entity
+```java
+@GenericGenerator(name = "ulid", strategy = "io.github.jaspeen.ulid.hibernate.ULIDIdGenerator")
+package my.service.model;
+
+import org.hibernate.annotations.GenericGenerator;
+```
