@@ -1,4 +1,5 @@
 # ulid-java
+![CI](https://github.com/ubtr/ubt-go/actions/workflows/ci.yml/badge.svg)
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.jaspeen/ulid-java)](https://central.sonatype.com/artifact/io.github.jaspeen/ulid-java)
 [![javadoc](https://javadoc.io/badge2/io.github.jaspeen/ulid-java/javadoc.svg)](https://javadoc.io/doc/io.github.jaspeen/ulid-java)
 
