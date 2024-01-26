@@ -58,6 +58,11 @@ public class ULIDIdGenerator implements IdentifierGenerator {
 
     @Override public Serializable generate(SharedSessionContractImplementor session, Object object) throws
                                                                                                     HibernateException {
+        Serializable id = session.getEntityPersister(null, object)
+                .getClassMetadata().getIdentifier(object, session);
+        if (id != null) {
+            return id;
+        }
         ULID val = ULID.random();
         return valueTransformer.transform(val);
     }
