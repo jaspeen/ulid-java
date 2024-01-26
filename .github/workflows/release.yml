@@ -45,4 +45,4 @@ jobs:
           NEXUS_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
           GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
           GPG_SECRET_KEY: ${{ secrets.GPG_SECRET_KEY }}
-        run: ./gradlew -s --no-daemon -Pversion=${TAG_VERSION} publish closeAndReleaseStagingRepository ${DRY_RUN_OPT} -PgpgKey="${GPG_SECRET_KEY}" -PgpgPassphrase="${GPG_PASSPHRASE}" -PnexusUsername="${NEXUS_USERNAME}" -PnexusPassword="${NEXUS_PASSWORD}"
+        run: ./gradlew -s --no-daemon -Pversion=${RELEASE_VERSION} publish closeAndReleaseStagingRepository ${DRY_RUN_OPT} -PgpgKey="${GPG_SECRET_KEY}" -PgpgPassphrase="${GPG_PASSPHRASE}" -PnexusUsername="${NEXUS_USERNAME}" -PnexusPassword="${NEXUS_PASSWORD}"
