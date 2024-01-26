@@ -1,8 +1,9 @@
 plugins {
     id 'java-library'
     id "me.champeau.jmh" version "0.7.1"
-    id 'org.jreleaser' version '1.7.0'
+    id "io.github.gradle-nexus.publish-plugin" version "1.3.0"
     id 'maven-publish'
+    id "signing"
 }
 
 group 'io.github.jaspeen'
@@ -29,8 +30,11 @@ java {
     withSourcesJar()
 }
 
-tasks.named('test') {
+test {
     useJUnitPlatform()
+    testLogging {
+        events "PASSED", "SKIPPED", "FAILED"
+    }
 }
 
 publishing {
@@ -69,39 +73,30 @@ publishing {
     }
 }
 
-jreleaser {
-    //dryrun = true
-    project {
-        java {
-            multiProject = false
-        }
-    }
-    release {
-        github {
-            overwrite = true
-            skipTag = true
-            draft = true
-        }
-    }
-    signing {
-        active = 'ALWAYS'
-        armored = true
-    }
-    deploy {
-        maven {
-            nexus2 {
-                central {
-                    active = 'ALWAYS'
-                    url = 'https://s01.oss.sonatype.org/service/local'
-                    snapshotUrl = 'https://s01.oss.sonatype.org/content/repositories/snapshots/'
-                    applyMavenCentralRules = true
-                    closeRepository = true
-                    releaseRepository = false
-                    stagingRepository('build/staging-deploy')
-                }
-            }
+signing {
+    def gpgKey = findProperty("gpgKey")
+    def gpgPassphrase = findProperty("gpgPassphrase")
+    useInMemoryPgpKeys(gpgKey, gpgPassphrase)
+    sign publishing.publications.maven
+}
+nexusPublishing {
+    repositories {
+        sonatype {
+            nexusUrl.set(uri("https://s01.oss.sonatype.org/service/local/"))
+            snapshotRepositoryUrl.set(uri("https://s01.oss.sonatype.org/content/repositories/snapshots/"))
+            username = findProperty("nexusUsername")
+            password = findProperty("nexusPassword")
         }
     }
 }
+task checkVersion {
+    doLast {
+        def ver = findProperty("version")
+        if (ver == 'unspecified') {
+            throw new GradleException("invalid version, specify -Pversion=<x.y.z>")
+        }
+    }
+}
+publish.dependsOn checkVersion
 
 
