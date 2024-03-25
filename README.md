@@ -8,24 +8,23 @@ Generate and parse ULIDs in Crockford base32 text and binary representations.
 See [ULID specification](https://github.com/ulid/spec) for more info
 
 ## Key points
-* Java 8+
+* Java 11+
 * API similar to java.util.UUID
 * Optional monotonic generator
-* Optional hibernate type and ID generator
-
+* Optional hibernate type and ID generator (requires hibernate 6.x)
 ## Install
 ### Maven
 ```xml
 <dependency>
     <groupId>io.github.jaspeen</groupId>
     <artifactId>ulid-java</artifactId>
-    <version>0.1.0</version>
+    <version>0.2.0</version>
 </dependency>
 ```
 ### Gradle
 ```groovy
 dependencies {
-    implementation 'io.github.jaspeen:ulid-java:0.1.0'
+    implementation 'io.github.jaspeen:ulid-java:0.2.0'
 }
 ```
 
@@ -85,3 +84,6 @@ package my.service.model;
 
 import org.hibernate.annotations.GenericGenerator;
 ```
+
+### Notes
+_For java 8 and hibernate 5 use verions 0.1.x_

@@ -8,14 +8,14 @@ import java.util.UUID;
 import io.github.jaspeen.ulid.ULID;
 import org.hibernate.internal.util.BytesHelper;
 import org.hibernate.type.descriptor.WrapperOptions;
-import org.hibernate.type.descriptor.java.AbstractTypeDescriptor;
-import org.hibernate.type.descriptor.spi.JdbcRecommendedSqlTypeMappingContext;
-import org.hibernate.type.descriptor.sql.SqlTypeDescriptor;
+import org.hibernate.type.descriptor.java.AbstractJavaType;
+import org.hibernate.type.descriptor.jdbc.JdbcType;
+import org.hibernate.type.descriptor.jdbc.JdbcTypeIndicators;
 
 /**
  * Descriptor for {@link ULID} handling.
  */
-public class ULIDTypeDescriptor extends AbstractTypeDescriptor<ULID> {
+public class ULIDTypeDescriptor extends AbstractJavaType<ULID> {
     public static final ULIDTypeDescriptor
             INSTANCE = new ULIDTypeDescriptor();
 
@@ -32,8 +32,8 @@ public class ULIDTypeDescriptor extends AbstractTypeDescriptor<ULID> {
     }
 
     @Override
-    public SqlTypeDescriptor getJdbcRecommendedSqlType(JdbcRecommendedSqlTypeMappingContext context) {
-        return context.getTypeConfiguration().getSqlTypeDescriptorRegistry().getDescriptor(Types.VARCHAR);
+    public JdbcType getRecommendedJdbcType(JdbcTypeIndicators indicators) {
+        return indicators.getTypeConfiguration().getJdbcTypeRegistry().getDescriptor(Types.VARCHAR);
     }
 
     @SuppressWarnings({"unchecked"})

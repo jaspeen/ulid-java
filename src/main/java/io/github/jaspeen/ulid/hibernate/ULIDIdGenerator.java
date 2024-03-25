@@ -8,7 +8,6 @@ import org.hibernate.id.IdentifierGenerator;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.type.Type;
 
-import java.io.Serializable;
 import java.util.Properties;
 import java.util.UUID;
 
@@ -56,9 +55,9 @@ public class ULIDIdGenerator implements IdentifierGenerator {
         }
     }
 
-    @Override public Serializable generate(SharedSessionContractImplementor session, Object object) throws
+    @Override public Object generate(SharedSessionContractImplementor session, Object object) throws
                                                                                                     HibernateException {
-        Serializable id = session.getEntityPersister(null, object)
+        Object id = session.getEntityPersister(null, object)
                 .getClassMetadata().getIdentifier(object, session);
         if (id != null) {
             return id;

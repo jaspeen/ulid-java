@@ -16,15 +16,15 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.9.2'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
-    implementation 'org.hibernate:hibernate-core:5.6.3.Final'
+    implementation 'org.hibernate:hibernate-core:6.4.4.Final'
 }
 
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(17)
     }
-    sourceCompatibility = "1.8"
-    targetCompatibility = "1.8"
+    sourceCompatibility = "11"
+    targetCompatibility = "11"
 
     withJavadocJar()
     withSourcesJar()
